@@ -1,3 +1,41 @@
+# GUI
+import tkinter as tk
+from tkinter import *
+from tkinter import ttk
+from tkinter.scrolledtext import *
+
+window = Tk()
+window.title("Qoi")
+window.geometry('800x640')
+
+style = ttk.Style(window)
+style.configure('lefttab.TNotebook',tabposition='wn')
+
+tab_control = ttk.Notebook(window,style='lefttab.TNotebook')
+tab1 = ttk.Frame(tab_control)
+tab2 = ttk.Frame(tab_control)
+tab_control.add(tab1,text=f'{"Home":^22}')
+tab_control.add(tab2,text=f'{"About":^22}')
+tab_control.pack(expand=1,fill='both')
+
+#'Home' page
+l1 = Label(tab1,text='Welcome to Qoi!', padx=5, pady=5)
+l1.grid(row=1,column=0)
+inputField = ScrolledText(tab1, height=12)
+inputField.grid(row=2,column=0,columnspan=2,pady=5,padx=5)
+
+l2 = Label(tab1, text='Number of sentences in summary:',padx=5,pady=5)
+l2.grid(row=4,column=0)
+numField = Entry(tab1)
+numField.grid(row=4,column=1)
+
+b1 = Button(tab1,text='Submit',width=10,bg='#000000',fg='#000000')
+b1.grid(row=5,column=1,padx=10,pady=10)
+
+
+
+
+
 import spacy
 from spacy.lang.en.stop_words import STOP_WORDS
 from string import punctuation
@@ -15,8 +53,6 @@ nlp = spacy.load('en_core_web_sm')
 docx = nlp(document1)
 mytokens = [token.text for token in docx]
 
-
-
 word_frequencies = {}
 for word in docx:
     if word.text not in stopwords:
@@ -31,7 +67,7 @@ maximum_frequency = max(word_frequencies.values())
 for word in word_frequencies.keys():  
         word_frequencies[word] = (word_frequencies[word]/maximum_frequency)
 
-print(word_frequencies)
+#print(word_frequencies)
 
 sentence_list = [ sentence for sentence in docx.sents ]
 
@@ -47,21 +83,18 @@ for sent in sentence_list:
 
 #print(sentence_scores)
 
-summarized_sentences = nlargest(7, sentence_scores, key=sentence_scores.get)
+summarized_sentences = nlargest(4, sentence_scores, key=sentence_scores.get)
 
 #print(summarized_sentences)
-
-for w in summarized_sentences:
-    print(w.text)
 
 final_sentences = [ w.text for w in summarized_sentences ]
 
 summary = ' '.join(final_sentences)
 
-print(document1)
 print("---------")
-print(summary)
-
+#print(document1)
+print("---------")
+#print(summary)
 
 
 
