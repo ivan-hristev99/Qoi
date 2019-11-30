@@ -46,6 +46,22 @@ for token in doc:
         
 print(output)
 
+try: 
+    from googlesearch import search 
+except ImportError:  
+    print("No module named 'google' found") 
+  
+# to search
+query = ""
+for x in output:
+    query += " " + x
+
+
+print(query)
+
+for url in search(query, stop=3): 
+    print(url) 
+
 
 
 
