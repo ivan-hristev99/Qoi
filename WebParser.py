@@ -1,23 +1,25 @@
-class WebScrapper:
-
-def __init__(self):
-    self.list
-
 
 from lxml import html
 import requests
 
+class WebScrapper:
 
-toSummarize = ""
+    def __init__(self):
+        print("Web scraping initialized...")
 
-for url in list:
-    page = requests.get('url')
-    tree = html.fromstring(page.content)
-    text = tree.xpath('//p/text()')
-    toSummarize += " " + text
+    def webScrape(self, webList):
+        toSummarize = ""
+        text1 = ""
+        for url in webList:
+            page = requests.get(url)
+            tree = html.fromstring(page.content)
+            text1 = tree.xpath('//p/text()')
+            for x in text1:
+                toSummarize += " " + x            
+            
 
 
-print(toSummary)
+        return(toSummarize)
 
 
 

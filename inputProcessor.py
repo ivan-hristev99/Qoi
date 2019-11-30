@@ -4,6 +4,7 @@
 #
 
 from speechToText import *
+from WebParser import *
 import spacy
 from spacy.symbols import nsubj, VERB
 
@@ -61,8 +62,18 @@ for x in output:
 
 print(query)
 
+urlArrayList = []
+
 for url in search(query, stop=3): 
-    print(url) 
+    urlArrayList.append(url)
+
+print(urlArrayList)
+
+w1 = WebScrapper()
+webStrings = w1.webScrape(urlArrayList)
+
+print(webStrings)
+
 
 
 
