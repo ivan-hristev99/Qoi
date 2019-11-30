@@ -5,6 +5,7 @@
 
 from speechToText import *
 from WebParser import *
+from summariser import *
 import spacy
 from spacy.symbols import nsubj, VERB
 
@@ -72,7 +73,53 @@ print(urlArrayList)
 w1 = WebScrapper()
 webStrings = w1.webScrape(urlArrayList)
 
+summarise1 = Summarizer()
+outputResult = summarise1.summarize(webStrings)
+
 print(webStrings)
+print(outputResult)
+
+
+'''
+# GUI
+import tkinter as tk
+from tkinter import *
+from tkinter import ttk
+from tkinter.scrolledtext import *
+
+window = Tk()
+window.title("Qoi")
+window.geometry('800x640')
+
+style = ttk.Style(window)
+style.configure('lefttab.TNotebook',tabposition='wn')
+
+tab_control = ttk.Notebook(window,style='lefttab.TNotebook')
+tab1 = ttk.Frame(tab_control)
+tab2 = ttk.Frame(tab_control)
+tab_control.add(tab1,text=f'{"Home":^22}')
+tab_control.add(tab2,text=f'{"About":^22}')
+tab_control.pack(expand=1,fill='both')
+
+#'Home' page
+l1 = Label(tab1,text='Welcome to Qoi! Enter a question', padx=5, pady=5)
+l1.grid(row=1,column=0)
+inputField = ScrolledText(tab1, height=3)
+inputField.grid(row=2,column=0,columnspan=2,pady=5,padx=5)
+
+l2 = Label(tab1, text='Number of sentences in summary:',padx=5,pady=5)
+l2.grid(row=4,column=0)
+numField = Entry(tab1)
+numField.grid(row=4,column=1)
+
+b1 = Button(tab1,text='Submit',width=10,bg='#000000',fg='#000000', command=summarize)
+b1.grid(row=5,column=1,padx=10,pady=10)
+
+l3 = Label(tab1,text='Result', padx=5, pady=5)
+l3.grid(row=6,column=0)
+result = ScrolledText(tab1,height=10)
+result.grid(row=7,column=0,columnspan=3,padx=5,pady=5)
+'''
 
 
 
