@@ -13,9 +13,9 @@ from spacy.symbols import nsubj, VERB
 nlp = spacy.load("en_core_web_sm")
 
 #Process whole documents
-#text = input("QOI: Hi there, how can I help? ")
-s1 = SpeechToText()
-text = s1.recognizeSpeech()
+text = input("QOI: Hi there, how can I help? ")
+#s1 = SpeechToText()
+#text = s1.recognizeSpeech()
 
 doc = nlp(text)
 output = set()
@@ -85,7 +85,7 @@ print(query)
 
 urlArrayList = []
 
-for url in search(query, stop=3): 
+for url in search(query, stop=2): 
     urlArrayList.append(url)
 
 print(urlArrayList)

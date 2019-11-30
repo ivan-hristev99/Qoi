@@ -53,7 +53,7 @@ class Summarizer:
 
         #print(sentence_scores)
 
-        summarized_sentences = nlargest(4, sentence_scores, key=sentence_scores.get)
+        summarized_sentences = nlargest(10, sentence_scores, key=sentence_scores.get)
 
         #print(summarized_sentences)
 

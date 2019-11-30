@@ -14,8 +14,14 @@ class WebScrapper:
             page = requests.get(url)
             tree = html.fromstring(page.content)
             text1 = tree.xpath('//p/text()')
+            #text2 = tree.xpath('//a/text()')
             for x in text1:
-                toSummarize += " " + x            
+                if (len(toSummarize) < 1500):
+                    toSummarize += " " + x
+                else:
+                    break
+            #for a in text2:
+               # toSummarize += " " + a
             
 
 
