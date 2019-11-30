@@ -4,6 +4,7 @@ Questions of Interest - HackKings 6.0
 NLP Query Summarizer 
 
 BACKEND--------------
+
 Three major parts:
 1. Getting the input from a user (voice) and turning it into an efficient query
 2. Web scrapping for the results of the query
