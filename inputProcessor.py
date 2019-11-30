@@ -3,7 +3,7 @@
 #
 #
 
-
+from speechToText import *
 import spacy
 from spacy.symbols import nsubj, VERB
 
@@ -12,8 +12,10 @@ nlp = spacy.load("en_core_web_sm")
 
 # Process whole documents
 # text = input("QOI: Hi there, how can I help? ")
+s1 = SpeechToText()
+text = s1.recognizeSpeech()
 
-doc = nlp("How does Vodafone relate to IBM?")
+doc = nlp(text)
 arrayOfChunks = [chunk.text for chunk in doc.noun_chunks]
 longestChunk = (max(arrayOfChunks, key=len))
 
