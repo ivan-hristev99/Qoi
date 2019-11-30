@@ -18,7 +18,6 @@ s1 = SpeechToText()
 text = s1.recognizeSpeech()
 
 doc = nlp(text)
-arrayOfChunks = [chunk.text for chunk in doc.noun_chunks]
 output = set()
 
 for token in doc:
@@ -28,19 +27,10 @@ for token in doc:
 print("Noun phrases:", [chunk.text for chunk in doc.noun_chunks])
 print("Verbs:", [token.lemma_ for token in doc if token.pos_ == "VERB"])
 
-nouns = [chunk.text for chunk in doc.noun_chunks]
-
-for entity in doc.ents:
-    nouns.remove(entity.text)
-    
-if nouns:
-    longestChunk = (max(nouns, key=len))
-    output.add(longestChunk)
-
 # Find named entities, phrases and concepts
 for entity in doc.ents:
     print(entity.text, entity.label_)
-
+          
 # Finding a verb with a subject from below — good
 verbs = set()
 for possible_subject in doc:
@@ -48,10 +38,21 @@ for possible_subject in doc:
         verbs.add(possible_subject.head)
 print(verbs)
 
-
+# Refining text
+nouns = [chunk.text for chunk in doc.noun_chunks]
+arrayOfEntities = []
 
 for entity in doc.ents:
     output.add(entity.text)
+
+if arrayOfEntities:
+    for entity in doc.ents:
+        nouns.remove(entity.text)
+    
+if nouns:
+    longestChunk = (max(nouns, key=len))
+    output.add(longestChunk)
+
 
 for token in doc:
     if token.pos_=="VERB":
@@ -59,12 +60,16 @@ for token in doc:
             if token.lemma_!="tell":
                 if token.lemma_!="give":
                     output.add(token.lemma_)
-        
+
 if not output:
-    output.add(max(nouns, key=len))
+    biggestNoun=max(nouns, key=len)
+    if biggestNoun != "me" :
+        output.add(biggestNoun)
+
+          
 print(output)
 
-
+# google search
 try: 
     from googlesearch import search 
 except ImportError:  
@@ -91,8 +96,13 @@ webStrings = w1.webScrape(urlArrayList)
 summarise1 = Summarizer()
 outputResult = summarise1.summarize(webStrings)
 
-print(webStrings)
+#print(webStrings)
 print(outputResult)
+
+print("Statistics:")
+print("Web scrapping scrapped ",len(webStrings)," words.");
+print("Summarizer summarized it to " ,len(outputResult), " words.");
+
 
 
 '''
