@@ -12,14 +12,14 @@ from spacy.symbols import nsubj, VERB
 # Load English tokenizer, tagger, parser, NER and word vectors
 nlp = spacy.load("en_core_web_sm")
 
-# Process whole documents
-# text = input("QOI: Hi there, how can I help? ")
+#Process whole documents
+#text = input("QOI: Hi there, how can I help? ")
 s1 = SpeechToText()
 text = s1.recognizeSpeech()
 
 doc = nlp(text)
 arrayOfChunks = [chunk.text for chunk in doc.noun_chunks]
-longestChunk = (max(arrayOfChunks, key=len))
+output = set()
 
 for token in doc:
     print(token.text, token.pos_, token.dep_)
@@ -27,6 +27,15 @@ for token in doc:
 # Analyze syntax
 print("Noun phrases:", [chunk.text for chunk in doc.noun_chunks])
 print("Verbs:", [token.lemma_ for token in doc if token.pos_ == "VERB"])
+
+nouns = [chunk.text for chunk in doc.noun_chunks]
+
+for entity in doc.ents:
+    nouns.remove(entity.text)
+    
+if nouns:
+    longestChunk = (max(nouns, key=len))
+    output.add(longestChunk)
 
 # Find named entities, phrases and concepts
 for entity in doc.ents:
@@ -39,16 +48,22 @@ for possible_subject in doc:
         verbs.add(possible_subject.head)
 print(verbs)
 
-output = set()
+
+
 for entity in doc.ents:
     output.add(entity.text)
 
 for token in doc:
     if token.pos_=="VERB":
         if token.dep_!="xcomp":
-                output.add(token.lemma_)
+            if token.lemma_!="tell":
+                if token.lemma_!="give":
+                    output.add(token.lemma_)
         
+if not output:
+    output.add(max(nouns, key=len))
 print(output)
+
 
 try: 
     from googlesearch import search 
