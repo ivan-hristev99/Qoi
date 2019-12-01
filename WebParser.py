@@ -29,9 +29,6 @@ class WebScrapper:
     def webScrape(self, webList):
         toSummarize = ""
         text = ""
-        print('----------')
-        print(webList)
-        print('----------')
         for x in webList:
                 if "wikipedia" in x:
                     #print('wiki')
@@ -62,7 +59,6 @@ class WebScrapper:
                     else:
                         break
 
-        print(toSummarize)
         return(toSummarize)
 
     
