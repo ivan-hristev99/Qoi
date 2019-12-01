@@ -13,3 +13,11 @@ Three major parts:
 FRONTEND-------------
 1. Build an application which can take input from the user
 2. Shows summary of text query in a nice format
+
+APIs USED-------------
+- NLP input processor => spaCy
+- Speech recognition => pocketsphinx and pyaudio
+- Search browswing => Google search
+- Web scraping => BeautifulSoup4, lxml, requests
+- Text Summariser => spaCy
+- GUI => TkInter
