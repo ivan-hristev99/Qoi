@@ -12,9 +12,9 @@ class Qoi:
         self.message = "Hi there, how can I help?"
         self.label_text = StringVar()
         self.label_text.set(self.message)
-        self.label = Label(master, width=60, textvariable=self.label_text, font=("Courier", 14))
+        self.label = Label(master, width=80, textvariable=self.label_text, font=("Courier", 14))
 
-        self.entry = Entry(master, width=60, font=("Courier", 14))
+        self.entry = Entry(master, width=80, font=("Courier", 14))
 
         self.find_button = Button(master, text="Find Answer", font=("Courier", 14), command=self.find_pressed)
         self.voice_button = Button(master, text="Use Voice", font=("Courier", 14), command=self.voice_pressed)
@@ -28,7 +28,7 @@ class Qoi:
     def find_pressed(self):
         if len(self.entry.get()) == 0:
             return;
-        self.label= Label(self.master, width=60, font=("Courier", 14), text="Review your answer below...")
+        self.label= Label(self.master, width=80, font=("Courier", 14), text="Review your answer below...")
         self.label.grid(row=0, column=0, columnspan=5, sticky=W+E)
         
         entryText = self.entry.get()
@@ -56,19 +56,22 @@ class Qoi:
     def button_1_pressed(self):
         root1 = Tk()
         root1.title("Summary")
-        self.label2= Text(root1, width=50, height=10, font=("Courier", 14), wrap=WORD)
+        self.label2= Text(root1, width=80, height=20, font=("Courier", 14), wrap=WORD)
         self.label2.insert('1.0', self.resultsArray[0])
         self.label2.grid(row=0, column=0, columnspan=5, sticky=W+E)
 
     def button_2_pressed(self):
         root2 = Tk()
         root2.title("Statistics")
-        text8 = 'Amount of character\'s extracted: ' , self.resultsArray[1]
-        self.label3= Label(root2, width=40, text=text8, font=("Courier", 14), wraplength=500)
+        
+        self.label3= Label(root2, width=80, text="Amount of character\'s extracted: ", font=("Courier", 14))
         self.label3.grid(row=0, column=0, columnspan=5, sticky=W+E)
-        text9 = 'Amount of character\'s summarised to: ' , self.resultsArray[2]
-        self.label3= Label(root2, width=40, text=text9, font=("Courier", 14), wraplength=500)
+        self.label3= Label(root2, width=80, text="Amount of character\'s summarised to: ", font=("Courier", 14))
+        self.label3.grid(row=2, column=0, columnspan=5, sticky=W+E)
+        self.label3= Label(root2, width=80, text=self.resultsArray[1], font=("Courier", 14))
         self.label3.grid(row=1, column=0, columnspan=5, sticky=W+E)
+        self.label3= Label(root2, width=80, text=self.resultsArray[2], font=("Courier", 14))
+        self.label3.grid(row=3, column=0, columnspan=5, sticky=W+E)
 
     def button_3_pressed(self):
         self.button_1.destroy()
