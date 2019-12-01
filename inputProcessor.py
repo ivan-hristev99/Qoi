@@ -85,7 +85,7 @@ print(query)
 
 urlArrayList = []
 
-for url in search(query, stop=2): 
+for url in search(query, stop=4): 
     urlArrayList.append(url)
 
 print(urlArrayList)
@@ -100,8 +100,8 @@ outputResult = summarise1.summarize(webStrings)
 print(outputResult)
 
 print("Statistics:")
-print("Web scrapping scrapped ",len(webStrings)," words.");
-print("Summarizer summarized it to " ,len(outputResult), " words.");
+print("Web scrapping scrapped ",len(webStrings)," characters.");
+print("Summarizer summarized it to " ,len(outputResult), " characters.");
 
 
 

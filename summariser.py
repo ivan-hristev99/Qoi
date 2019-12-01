@@ -53,18 +53,18 @@ class Summarizer:
 
         #print(sentence_scores)
 
-        summarized_sentences = nlargest(10, sentence_scores, key=sentence_scores.get)
+        summarized_sentences = nlargest(5, sentence_scores, key=sentence_scores.get)
 
         #print(summarized_sentences)
 
         final_sentences = [ w.text for w in summarized_sentences ]
 
         summary = ' '.join(final_sentences)
-        return summary
-        #print("---------")
-        #print(document1)
-        #print("---------")
+        print("---------")
+        print(document1)
+        print("---------")
         #print(summary)
+        return summary
 
 
 
