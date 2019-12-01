@@ -16,8 +16,11 @@ class Qoi:
 
         self.entry = Entry(master, width=80, font=("Courier", 14))
 
-        self.find_button = Button(master, text="Find Answer", font=("Courier", 14), command=self.find_pressed)
-        self.voice_button = Button(master, text="Use Voice", font=("Courier", 14), command=self.voice_pressed)
+        self.find_button = Button(master, text="SEARCH", font=("Arial", 14), fg='white',
+                                  bd = 0, highlightbackground='orange', pady=5, height=10, width=20,  command=self.find_pressed)
+
+        self.voice_button = Button(master, text="USING VOICE", font=("Arial", 14), fg='white', highlightbackground='blue',
+                                   bd = 0, pady=5, height=10, width=20,  command=self.voice_pressed)
         
         self.label.grid(row=0, column=0, columnspan=5, sticky=W+E)
         self.entry.grid(row=1, column=1, columnspan=5, sticky=W+E)
@@ -28,7 +31,7 @@ class Qoi:
     def find_pressed(self):
         if len(self.entry.get()) == 0:
             return;
-        self.label= Label(self.master, width=80, font=("Courier", 14), text="Review your answer below...")
+        self.label= Label(self.master, width=80, font=("Arial", 14), text="Review your answer below...")
         self.label.grid(row=0, column=0, columnspan=5, sticky=W+E)
         
         entryText = self.entry.get()
@@ -42,14 +45,16 @@ class Qoi:
         inputText= inputP.getSummary(entryText)
         self.resultsArray = inputText
         
-        self.button_1 = Button(self.master, fg='black', bg='light grey' ,
-                               text="Get Answer", font=("Courier", 14), command=self.button_1_pressed)
+        self.button_1 = Button(self.master, text="ANSWER", font=("Arial", 15), fg='white', highlightbackground='orange' ,
+                               bd = 0, pady=5, height=10, width=60, command=self.button_1_pressed)
         self.button_1.grid(row=1, column=0, columnspan=5, sticky=W+E)
-        self.button_2 = Button(self.master, fg='black', bg='light grey' ,
-                               text="Get Statistics", font=("Courier", 14), command=self.button_2_pressed)
+        self.button_2 = Button(self.master, 
+                               text="STATISTICS", font=("Arial", 15),
+                               bd = 0, fg='white', highlightbackground='green' , width=60, pady=5, height=10, command=self.button_2_pressed)
         self.button_2.grid(row=2, column=0, columnspan=5, sticky=W+E)
-        self.button_3 = Button(self.master, fg='black', bg='light grey' ,
-                               text="Reset", font=("Courier", 14), command=self.button_3_pressed)
+        self.button_3 = Button(self.master, 
+                               text="RESET", font=("Arial", 14), fg='white', highlightbackground='blue',
+                               bd = 0, pady=5, height=5, width=60, command=self.button_3_pressed)
         self.button_3.grid(row=3, column=0, columnspan=5, sticky=W+E)
         
 
