@@ -1,5 +1,7 @@
 from bs4 import BeautifulSoup
+from bs4.element import Comment
 import requests
+import urllib.request
 from googlesearch import search  
 
 class WebScrapper:
@@ -7,11 +9,26 @@ class WebScrapper:
     def __init__(self):
         print("Web scraping initialized...")
 
+    def tag_visible(self, element):
+        if element.parent.name in ['style', 'script', 'head', 'title', 'meta', '[document]']:
+            return False
+        if isinstance(element, Comment):
+            return False
+        return True
+
+
+    def text_from_html(self, body):
+        soup = BeautifulSoup(body, 'html.parser')
+        texts = soup.findAll(text=True)
+        visible_texts = filter(self.tag_visible, texts)  
+        return u" ".join(t.strip() for t in visible_texts)
+
     def webScrape(self, webList):
         toSummarize = ""
         text = ""
-
-        #print(webList)
+        print('----------')
+        print(webList)
+        print('----------')
         for x in webList:
             if "wikipedia" in x:
                 #print('wiki')
@@ -27,7 +44,11 @@ class WebScrapper:
                 allText = '\n'.join([para.text for para in paragraphs])
                 toSummarize += " " + allText
             else:
-                print('no wiki')
+                html = urllib.request.urlopen(x).read()
+                #summarise1 = Summarizer()
+                #outputResult = summarise1.summarize(text_from_html(html))
+                #print(outputResult)
+                toSummarize += " " + self.text_from_html(html)
 
         print(toSummarize)
         return(toSummarize)

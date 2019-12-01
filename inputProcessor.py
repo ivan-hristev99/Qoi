@@ -85,8 +85,14 @@ print(query)
 
 urlArrayList = []
 
-for url in search(query, stop=4): 
-    urlArrayList.append(url)
+wikiFound = False;
+for url in search(query, stop=7):
+    if 'wikipedia' in url:
+        if (wikiFound == False):
+            wikiFound = True;
+            urlArrayList.append(url)
+    else:
+        urlArrayList.append(url)
 
 print(urlArrayList)
 
@@ -100,8 +106,8 @@ outputResult = summarise1.summarize(webStrings)
 print(outputResult)
 
 print("Statistics:")
-print("Web scrapping scrapped ",len(webStrings)," characters.");
-print("Summarizer summarized it to " ,len(outputResult), " characters.");
+print("Web scrapping scrapped ",len(webStrings)," chars.");
+print("Summarizer summarized it to " ,len(outputResult), " chars.");
 
 
 
