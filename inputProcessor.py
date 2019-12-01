@@ -93,7 +93,7 @@ class inputProcessor:
         urlArrayList = []
 
         wikiFound = False;
-        for url in search(query, stop=7):
+        for url in search(query, stop=3):
             if 'wikipedia' in url:
                 if (wikiFound == False):
                     wikiFound = True;
