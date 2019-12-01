@@ -1,5 +1,6 @@
 # Qoi
 Questions of Interest - HackKings 6.0
+Members: Oskar Ljungdell, Ivan Hristev, Alexis Dumon, Hadi Rizvi
 
 NLP Query Summarizer 
 
